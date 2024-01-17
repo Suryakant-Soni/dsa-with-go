@@ -5,14 +5,16 @@ import (
 )
 
 func main() {
-	// var arr1 = []int{4, 8, 13, 16, 20, 25, 28, 33}
-	// var arr2 = []int{-44, -11, 4, 8, 13, -9, 16, 20, -11, 25, -13, 28, 33, -1}
-	var merge1 = []int{2, 6, 8, 13, 16, 19, 22}
-	var merge2 = []int{3, 4, 6, 8, 12, 14, 15, 24, 28}
-	mergeArrays(merge1, merge2)
+	var arr1 = []int{4, 8, 13, 16, 20, 25, 28, 33,38}
+//	var arr2 = []int{-44, -11, 4, 8, 13, -9, 16, 20, -11, 25, -13, 28, 33, -1}
+	var merge1 = []int{2, 6, 8, 13, 16, 19, 22,33,38}
+	// var merge2 = []int{3, 4, 6, 8, 12, 14, 15, 24, 28}
+	// mergeArrays(merge1, merge2)
 	// InsertInSortedArray(&arr1, 17)
 	// SeggregateNegative(&arr2)
-	// log.Println("new array", arr2)
+	//log.Println("is sorted ?", CheckIfSorted(arr1))
+	log.Println("UnionArrays", UnionArrays(arr1,merge1))
+	// log.Println("new array", arr1)
 }
 
 func mergeArrays(m1 []int, m2 []int) {
@@ -86,4 +88,37 @@ func InsertInSortedArray(a *[]int, n int) {
 			(*a)[0] = n
 		}
 	}
+}
+
+func CheckIfSorted(a []int) bool{
+	for i := 1; i < len(a); i++{
+		if a[i] < a[i-1]{
+			return false
+		}
+	}
+		return true
+}
+
+func UnionArrays(a []int,b[]int) (c []int){
+	// i, j
+	i,j := 0,0
+	for( i < len(a) && j < len(b)){
+		if a[i] == b[j] {
+			c = append(c, a[i])
+			i++
+			j++
+			continue
+		}
+		if a[i] < b[j]{
+			c = append(c, a[i])
+			i++
+			continue
+		}
+		if a[i] > b[j]{
+			c = append(c, b[j])
+			j++
+			continue
+		}
+	}
+	return c
 }
